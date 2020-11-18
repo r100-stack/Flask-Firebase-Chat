@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>FlaskChat Backend</title>
+    <title>FlaskChat</title>
     <style>
         .div-message {
             border-style: solid;
@@ -59,27 +59,15 @@
     firebase.initializeApp(firebaseConfig);
     // firebase.analytics();
 
-    // const firebase = require("firebase");
-    // // Required for side-effects
-    // require("firebase/firestore");
-
     var db = firebase.firestore();
 </script>
 
 <script>
-    // db.collection("messages").onSnapshot(function(doc) {
-    //     console.log(typeof doc);
-    //     // console.log("Current data: ", doc.data());
-    // }, function(doc) {
-    //     console.log("Current data: ", doc.data());
-    // });
-
     db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
         ul = $('#ul-messages');
         ul.empty();
 
         querySnapshot.forEach((doc) => {
-            // console.log(`${doc.id} => ${doc.data()}`);
             div = $('<div class="div-message">');
             title = $('<h3>');
             subtitle = $('<h5>');
@@ -104,9 +92,6 @@
         message = form.find("textarea[name='message']").val();
         sender = form.find("input[name='sender']").val();
 
-        // console.log(message);
-        // console.log(sender);
-
         db.collection("messages").add({
             message: message,
             sender: sender,
@@ -114,30 +99,5 @@
         });
     })
 </script>
-
-<!-- <script>
-    $.ajax({
-        url: '/messages',
-        type: "GET",
-        success: function (messages) {
-            console.log(messages);
-            ul = $('#ul-messages');
-            messages.forEach(message => {
-                div = $('<div class="div-message">');
-                title = $('<h3>');
-                subtitle = $('<h5>');
-
-                title.text(message.message);
-                subtitle.text(message.sender);
-
-                div.append(title);
-                div.append(subtitle);
-
-                ul.append(div);
-                ul.append($('<br>'));
-            });
-        }
-    })
-</script> -->
 
 </html>
