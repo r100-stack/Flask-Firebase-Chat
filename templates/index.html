@@ -25,14 +25,9 @@
     </form>
 
     <br>
-    <br>
-    <br>
-    <br>
 
     <h2>Messages</h2>
-    <div id="ul-messages">
-
-    </div>
+    <div id="ul-messages"></div>
 
 </body>
 
@@ -42,18 +37,20 @@
     $.ajax({
         url: '/messages',
         type: "GET",
-        success: function(messages) {
+        success: function (messages) {
             console.log(messages);
             ul = $('#ul-messages');
             messages.forEach(message => {
                 div = $('<div class="div-message">');
                 title = $('<h3>');
                 subtitle = $('<h5>');
+
                 title.text(message.message);
                 subtitle.text(message.sender);
+
                 div.append(title);
                 div.append(subtitle);
-                // ul.append(`<h3>${message.message}</h3>`)
+
                 ul.append(div);
                 ul.append($('<br>'));
             });
