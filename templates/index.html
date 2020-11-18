@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title>FlaskChat Backend</title>
+    <style>
+        .div-message {
+            border-style: solid;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Flask Chat Backend</h1>
+
+    <form action="/messages" method="POST">
+        <label>Sender</label>
+        <br>
+        <input type="text" name="sender">
+        <br>
+        <label>Message</label>
+        <br>
+        <textarea name="message"></textarea>
+        <br>
+        <input type="submit" value="Send">
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h2>Messages</h2>
+    <div id="ul-messages">
+
+    </div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $.ajax({
+        url: '/messages',
+        type: "GET",
+        success: function(messages) {
+            console.log(messages);
+            ul = $('#ul-messages');
+            messages.forEach(message => {
+                div = $('<div class="div-message">');
+                title = $('<h3>');
+                subtitle = $('<h5>');
+                title.text(message.message);
+                subtitle.text(message.sender);
+                div.append(title);
+                div.append(subtitle);
+                // ul.append(`<h3>${message.message}</h3>`)
+                ul.append(div);
+                ul.append($('<br>'));
+            });
+        }
+    })
+</script>
+
+</html>
