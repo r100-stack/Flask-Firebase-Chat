@@ -62,7 +62,7 @@
     var db = firebase.firestore();
 </script>
 
-<script></script>
+<script>
     db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
         ul = $('#ul-messages');
         ul.empty();
