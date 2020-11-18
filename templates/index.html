@@ -34,27 +34,58 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
+    function add_messages(messages) {
+        ul = $('#ul-messages');
+        ul.empty();
+        messages.forEach(message => {
+            div = $('<div class="div-message">');
+            title = $('<h3>');
+            subtitle = $('<h5>');
+
+            title.text(message.message);
+            subtitle.text(message.sender);
+
+            div.append(title);
+            div.append(subtitle);
+
+            ul.append(div);
+            ul.append($('<br>'));
+        });
+    }
+</script>
+
+<script>
     $.ajax({
         url: '/messages',
         type: "GET",
         success: function (messages) {
             console.log(messages);
-            ul = $('#ul-messages');
-            messages.forEach(message => {
-                div = $('<div class="div-message">');
-                title = $('<h3>');
-                subtitle = $('<h5>');
-
-                title.text(message.message);
-                subtitle.text(message.sender);
-
-                div.append(title);
-                div.append(subtitle);
-
-                ul.append(div);
-                ul.append($('<br>'));
-            });
+            add_messages(messages);
         }
+    });
+</script>
+
+<script>
+    form = $('form');
+    form.on('submit', function (event) {
+        event.preventDefault();
+
+        body = {
+            'message': form.find("textarea[name='message']").val(),
+            'sender': form.find("input[name='sender']").val()
+        };
+
+        $.ajax({
+            url: '/messages',
+            type: "POST",
+            headers: {'Content-Type': 'application/json'},
+            data: JSON.stringify(body),
+            success: function (messages) {
+                console.log(messages);
+                add_messages(messages);
+            }
+        });
+
     })
 </script>
 

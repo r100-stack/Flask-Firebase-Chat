@@ -28,6 +28,18 @@ def get_messages():
 
 @app.route('/messages', methods=['POST'])
 def post_message():
-    conn.execute('insert into messages (message, sender) values (%s, %s)', (request.form['message'], request.form['sender']))
-    return redirect('/')
+    # print(request.data)
+    # print(type(request.data))
+    # print(request.get_json())
+    # print(type(request.get_json()))
+    # print(request.json)
+    # print(type(request.json))
+
+    # req_data = request.get_json()
+    # print(req_data)
+
+    # body = request.get_json
+
+    conn.execute('insert into messages (message, sender) values (%s, %s)', (request.get_json()['message'], request.get_json()['sender']))
+    return redirect('/messages')
 
