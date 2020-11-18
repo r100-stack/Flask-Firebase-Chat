@@ -33,11 +33,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<!-- TODO (1): Create a Firebase project -->
-<!-- TODO (2): Add the Firebase setup code -->
-<!-- TODO (3): Include the Firestore dependency -->
-<!-- TODO (4): Create an instance of the database and name it db -->
-
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 
@@ -67,10 +62,7 @@
     var db = firebase.firestore();
 </script>
 
-<script>
-    // TODO (5): Query the messages collection and order by timestamp desc
-    // TODO (6): For each document in the querySnapshot, add a div for the message
-
+<script></script>
     db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
         ul = $('#ul-messages');
         ul.empty();
@@ -99,9 +91,6 @@
 
         message = form.find("textarea[name='message']").val();
         sender = form.find("input[name='sender']").val();
-
-        // TODO (7): Add a message to the messages collection
-        // TODO (8): Message should include message, sender and timestamp
 
         db.collection("messages").add({
             message: message,
