@@ -39,57 +39,57 @@
 <!-- TODO (4): Create an instance of the database and name it db -->
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
-<!-- <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<!-- <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
 
 <script>
-    // // Your web app's Firebase configuration
-    // // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    // var firebaseConfig = {
-    //     apiKey: "AIzaSyAW2ELiIJpHrkU40So9iOqePeGBcgfOB-E",
-    //     authDomain: "flaskchat-6684a.firebaseapp.com",
-    //     databaseURL: "https://flaskchat-6684a.firebaseio.com",
-    //     projectId: "flaskchat-6684a",
-    //     storageBucket: "flaskchat-6684a.appspot.com",
-    //     messagingSenderId: "94841685089",
-    //     appId: "1:94841685089:web:f1abf658720a87403cd620",
-    //     measurementId: "G-FWENEM06PJ"
-    // };
-    // // Initialize Firebase
-    // firebase.initializeApp(firebaseConfig);
-    // // firebase.analytics();
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyAW2ELiIJpHrkU40So9iOqePeGBcgfOB-E",
+        authDomain: "flaskchat-6684a.firebaseapp.com",
+        databaseURL: "https://flaskchat-6684a.firebaseio.com",
+        projectId: "flaskchat-6684a",
+        storageBucket: "flaskchat-6684a.appspot.com",
+        messagingSenderId: "94841685089",
+        appId: "1:94841685089:web:f1abf658720a87403cd620",
+        measurementId: "G-FWENEM06PJ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
 
-    // var db = firebase.firestore();
+    var db = firebase.firestore();
 </script>
 
 <script>
     // TODO (5): Query the messages collection and order by timestamp desc
     // TODO (6): For each document in the querySnapshot, add a div for the message
 
-    // db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
-    //     ul = $('#ul-messages');
-    //     ul.empty();
+    db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
+        ul = $('#ul-messages');
+        ul.empty();
 
-    //     querySnapshot.forEach((doc) => {
-    //         div = $('<div class="div-message">');
-    //         title = $('<h3>');
-    //         subtitle = $('<h5>');
+        querySnapshot.forEach((doc) => {
+            div = $('<div class="div-message">');
+            title = $('<h3>');
+            subtitle = $('<h5>');
 
-    //         title.text(doc.data()['message']);
-    //         subtitle.text(doc.data()['sender']);
+            title.text(doc.data()['message']);
+            subtitle.text(doc.data()['sender']);
 
-    //         div.append(title);
-    //         div.append(subtitle);
+            div.append(title);
+            div.append(subtitle);
 
-    //         ul.append(div);
-    //         ul.append($('<br>'));
-    //     });
-    // });
+            ul.append(div);
+            ul.append($('<br>'));
+        });
+    });
 </script>
 
 <script>
@@ -103,11 +103,11 @@
         // TODO (7): Add a message to the messages collection
         // TODO (8): Message should include message, sender and timestamp
 
-        // db.collection("messages").add({
-        //     message: message,
-        //     sender: sender,
-        //     timestamp: firebase.firestore.Timestamp.now()
-        // });
+        db.collection("messages").add({
+            message: message,
+            sender: sender,
+            timestamp: firebase.firestore.Timestamp.now()
+        });
     })
 </script>
 
