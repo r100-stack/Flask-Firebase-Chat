@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <title>FlaskChat</title>
+    <style>
+        .div-message {
+            border-style: solid;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Flask Chat Backend</h1>
+
+    <form action="/messages" method="POST">
+        <label>Sender</label>
+        <br>
+        <input type="text" name="sender">
+        <br>
+        <label>Message</label>
+        <br>
+        <textarea name="message"></textarea>
+        <br>
+        <input type="submit" value="Send">
+    </form>
+
+    <br>
+
+    <h2>Messages</h2>
+    <div id="ul-messages"></div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyAW2ELiIJpHrkU40So9iOqePeGBcgfOB-E",
+        authDomain: "flaskchat-6684a.firebaseapp.com",
+        databaseURL: "https://flaskchat-6684a.firebaseio.com",
+        projectId: "flaskchat-6684a",
+        storageBucket: "flaskchat-6684a.appspot.com",
+        messagingSenderId: "94841685089",
+        appId: "1:94841685089:web:f1abf658720a87403cd620",
+        measurementId: "G-FWENEM06PJ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+
+    var db = firebase.firestore();
+</script>
+
+<script>
+    db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
+        ul = $('#ul-messages');
+        ul.empty();
+
+        querySnapshot.forEach((doc) => {
+            div = $('<div class="div-message">');
+            title = $('<h3>');
+            subtitle = $('<h5>');
+
+            title.text(doc.data()['message']);
+            subtitle.text(doc.data()['sender']);
+
+            div.append(title);
+            div.append(subtitle);
+
+            ul.append(div);
+            ul.append($('<br>'));
+        });
+    });
+</script>
+
+<script>
+    form = $('form');
+    form.on('submit', function (event) {
+        event.preventDefault();
+
+        message = form.find("textarea[name='message']").val();
+        sender = form.find("input[name='sender']").val();
+
+        db.collection("messages").add({
+            message: message,
+            sender: sender,
+            timestamp: firebase.firestore.Timestamp.now()
+        });
+    })
+</script>
+
+</html>
