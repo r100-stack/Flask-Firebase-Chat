@@ -1,0 +1,151 @@
+<html>
+
+<head>
+    <title>FlaskChat</title>
+    <style>
+        .div-message {
+            border-style: solid;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Flask Chat</h1>
+
+    <!-- Form that contains message and sender input options. -->
+    <form action="/messages" method="POST">
+        <label>Sender</label>
+        <br>
+        <input type="text" name="sender">
+        <br>
+        <label>Message</label>
+        <br>
+        <textarea name="message"></textarea>
+        <br>
+        <input type="submit" value="Send">
+    </form>
+
+    <br>
+
+    <h2>Messages</h2>
+    <div id="ul-messages"></div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    /**
+     * Populates the list (div tag) with the passed list of messages
+     * Each message in messages looks like 
+     * {
+     *  "ID": 5,
+     *  "message": "Sample message",
+     *  "sender": "John Doe"
+     * }
+     */
+    function populate_messages(messages) {
+        ul = $('#ul-messages');
+        ul.empty();
+        messages.forEach(message => {
+            div = $('<div class="div-message">');
+            title = $('<h3>');
+            subtitle = $('<h5>');
+
+            title.text(message.message);
+            subtitle.text(message.sender);
+
+            div.append(title);
+            div.append(subtitle);
+
+            ul.append(div);
+            ul.append($('<br>'));
+        });
+    }
+</script>
+
+<script>
+    /**
+     * Sends an AJAX request GET /messages to get the messages
+     * Sample response:
+     * {
+        "messages": [
+            {
+                "ID": 3,
+                "message": "Hi there",
+                "sender": "Steve"
+            },
+            {
+                "ID": 2,
+                "message": "Hello",
+                "sender": "Mike the Tiger"
+            },
+            {
+                "ID": 1,
+                "message": "Hi",
+                "sender": "Mike the Tiger"
+            }
+        ],
+            "success": true
+    }
+     */
+    function get_messages() {
+        $.ajax({
+            url: '/messages',
+            type: "GET",
+            success: function (response) {
+                console.log(response);
+
+                var success = response['success'];
+                if (success === true) {
+                    populate_messages(response['messages']);
+                } else {
+                    alert('Error downloading messages');
+                }
+            }
+        });
+    }
+</script>
+
+<script>
+    /**
+     * Intercepts the submit action on the form and overrides it with a custom action
+     */
+    form = $('form');
+    form.on('submit', function (event) {
+        event.preventDefault();
+
+        body = {
+            'message': form.find("textarea[name='message']").val(),
+            'sender': form.find("input[name='sender']").val()
+        };
+
+        /**
+         * Send a POST /messages request to add a message to the database
+         */
+        $.ajax({
+            url: '/messages',
+            type: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            data: JSON.stringify(body),
+            success: function (response) {
+                console.log(response);
+
+                var success = response['success']
+                if (success === true) {
+                    get_messages();
+                } else {
+                    alert('Error sending message');
+                }
+            }
+        });
+
+    })
+</script>
+
+<script>
+    // Calling get_messages() once when the page starts to get the latest messages.
+    get_messages();
+</script>
+
+</html>
