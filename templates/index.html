@@ -37,6 +37,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- 2. Icons for edit and delete -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- 3. Our js file with code to send requests to backend -->
+<script src="../static/custom_ajax.js"></script>
 
 <script>
     /**
@@ -136,40 +138,26 @@
      * Intercepts the submit action on the form and overrides it with a custom action
      */
     form = $('form');
-    form.on('submit', function (event) {
+    form.on('submit', async function (event) {
         event.preventDefault();
 
-        body = {
-            'message': form.find("textarea[name='message']").val(),
-            'sender': form.find("input[name='sender']").val()
-        };
+        message = form.find("textarea[name='message']").val();
+        sender = form.find("input[name='sender']").val();
 
-        /**
-         * Send a POST /messages request to add a message to the database
-         */
-        $.ajax({
-            url: '/messages',
-            type: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            data: JSON.stringify(body),
-            success: function (response) {
-                console.log(response);
+        response = await sendPostMessage(message, sender);
+        console.log(response);
 
-                var success = response['success']
-                if (success === true) {
-                    get_messages();
-                } else {
-                    alert('Error sending message');
-                }
-            }
-        });
-    })
+        var success = response['success']
+        if (success === true) {
+            syncMessages();
+        } else {
+            alert('Error sending message');
+        }
+    });
 </script>
 
-<script src="../static/custom_ajax.js"></script>
-
 <script>
-    // Calling get_messages() once when the page starts to get the latest messages.
+    // Calling syncMessages() once when the page starts to get the latest messages.
     syncMessages();
 </script>
 

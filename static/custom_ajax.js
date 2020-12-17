@@ -17,3 +17,14 @@ async function sendGetMessages() {
     response = await sendAjaxRequest('/messages', 'GET', null);
     return response;
 }
+
+/**
+ * Send a POST /messages request to add a message to the database
+ */
+async function sendPostMessage(message, sender) {
+    response = await sendAjaxRequest('/messages', 'POST', {
+        'message': message,
+        'sender': sender
+    });
+    return response;
+}
