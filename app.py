@@ -13,7 +13,7 @@ def index():
 def get_messages(*args, **kwargs):
     conn = kwargs['conn']
     results = conn.execute(
-        'select ID1, message, sender from messages order by ID desc;')
+        'select ID, message, sender from messages order by ID desc;')
 
     messages = []
 
@@ -40,6 +40,19 @@ def add_message(*args, **kwargs):
 
     conn.execute(
         'insert into messages (message, sender) values (%s, %s);', (message, sender,))
+
+    return jsonify({
+        'success': True
+    })
+
+@app.route('/messages', methods=['DELETE'])
+@get_connection_and_handle_error
+def delete_message(*args, **kwargs):
+    conn = kwargs['conn']
+
+    ID = request.json['ID']
+
+    conn.execute('delete from messages where ID=%s;', (ID,))
 
     return jsonify({
         'success': True

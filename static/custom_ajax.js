@@ -33,9 +33,9 @@ async function sendPostMessage(message, sender) {
     return response;
 }
 
-async function sendDeleteMessage(messageId) {
+async function sendDeleteMessage(ID) {
     response = await sendAjaxRequest('/messages', 'DELETE', {
-        'ID': messageId
+        'ID': ID
     });
     return response;
 }

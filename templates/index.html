@@ -68,25 +68,17 @@
             div.append(edit);
 
             _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
-            _delete.on('click', (event) => {
-                $.ajax({
-                    url: '/messages',
-                    type: "DELETE",
-                    headers: { 'Content-Type': 'application/json' },
-                    data: JSON.stringify(body),
-                    success: function (response) {
-                        console.log(response);
+            _delete.on('click', async (event) => {
+                response = await sendDeleteMessage(message.ID);
 
-                        var success = response['success']
-                        if (success === true) {
-                            get_messages();
-                        } else {
-                            alert('Error sending message');
-                        }
-                    }
-                });
+                success = response['success']
+                if (success === true) {
+                    syncMessages();
+                } else {
+                    // TODO: Must also catch exceptions when no response is received.
+                    alert('Error deleting message');
+                }
             });
-            _delete.on()
             div.append(_delete);
 
             ul.append(div);
