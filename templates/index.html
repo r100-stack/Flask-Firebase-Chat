@@ -83,8 +83,8 @@
     function populateDivWithMessage(div, message) {
         div.empty();
 
-        title = $('<h3 class="message">');
-        subtitle = $('<h5 class="sender">');
+        var title = $('<h3 class="message">');
+        var subtitle = $('<h5 class="sender">');
 
         title.text(message.message);
         subtitle.text(message.sender);
@@ -92,18 +92,18 @@
         div.append(title);
         div.append(subtitle);
 
-        edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
+        var edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
         edit.on('click', (event) => {            
-            div = $(`div #${message.ID}`);            
+            var div = $(`div #${message.ID}`);            
             populateDivWithEditMessage(div);
         })
         div.append(edit);
 
-        _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
+        var _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
         _delete.on('click', async (event) => {
-            response = await sendDeleteMessage(message.ID);
+            var response = await sendDeleteMessage(message.ID);
 
-            success = response['success']
+            var success = response['success']
             if (success) {
                 syncMessages();
             } else {
@@ -111,6 +111,7 @@
                 alert('Error deleting message');
             }
         });
+        div.append(_delete);
     }
 </script>
 
@@ -125,12 +126,12 @@
      * }
      */
     function populate_messages(messages) {
-        ul = $('#ul-messages');
+        var ul = $('#ul-messages');
         ul.empty();
         messages.forEach(message => {
-            div = $(`<div id="${message.ID}" class="div-message">`);
+            var div = $(`<div id="${message.ID}" class="div-message">`);
             populateDivWithMessage(div, message);
-            div.append(_delete);
+            // div.append(_delete);
 
             ul.append(div);
             ul.append($('<br>'));
@@ -164,9 +165,9 @@
     }
      */
     async function syncMessages() {
-        response = await sendGetMessages();
+        var response = await sendGetMessages();
 
-        success = response['success'];
+        var success = response['success'];
         if (success) {
             populate_messages(response['messages']);
         } else {
@@ -179,14 +180,14 @@
     /**
      * Intercepts the submit action on the form and overrides it with a custom action
      */
-    form = $('form');
+    var form = $('form');
     form.on('submit', async function (event) {
         event.preventDefault();
 
-        message = form.find("textarea[name='message']").val();
-        sender = form.find("input[name='sender']").val();
+        var message = form.find("textarea[name='message']").val();
+        var sender = form.find("input[name='sender']").val();
 
-        response = await sendPostMessage(message, sender);
+        var response = await sendPostMessage(message, sender);
 
         var success = response['success']
         if (success) {
