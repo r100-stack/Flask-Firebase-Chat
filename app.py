@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 from init_flask import app, engine
+from error_handling import get_connection_and_handle_error
 
 # Endpoint to display the homepage HTML file
 @app.route('/', methods=['GET'])
@@ -11,7 +12,8 @@ def index():
 def get_messages():
     try:
         conn = engine.connect()
-        results = conn.execute('select ID, message, sender from messages order by ID desc;')
+        results = conn.execute(
+            'select ID, message, sender from messages order by ID desc;')
 
         messages = []
 
@@ -37,22 +39,16 @@ def get_messages():
 
 # Adds a message to the database
 @app.route('/messages', methods=['POST'])
-def add_message():
-    try:
-        conn = engine.connect()
+@get_connection_and_handle_error
+def add_message(*args, **kwargs):
+    conn = kwargs['conn']
 
-        message = request.json['message']
-        sender = request.json['sender']
+    message = request.json['message']
+    sender = request.json['sender']
 
-        conn.execute('insert into messages (message, sender) values (%s, %s);', (message, sender,))
+    conn.execute(
+        'insert into messages (message, sender) values (%s, %s);', (message, sender,))
 
-        conn.close()
-
-        return jsonify({
-            'success': True
-        })
-    except Exception as ex:
-        print(ex)
-        return jsonify({
-            'success': False
-        }), 422
+    return jsonify({
+        'success': True
+    })

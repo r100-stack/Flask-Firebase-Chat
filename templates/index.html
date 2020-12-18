@@ -121,8 +121,7 @@
     }
      */
     async function syncMessages() {
-        messages = await sendGetMessages();
-        console.log(messages);
+        response = await sendGetMessages();
 
         success = response['success'];
         if (success === true) {
@@ -145,7 +144,6 @@
         sender = form.find("input[name='sender']").val();
 
         response = await sendPostMessage(message, sender);
-        console.log(response);
 
         var success = response['success']
         if (success === true) {

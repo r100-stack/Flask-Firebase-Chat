@@ -1,15 +1,19 @@
 function sendAjaxRequest(url, type, body) {
     return new Promise(resolve => {
-        $.ajax({
-            url: url,
-            type: type,
-            headers: { 'Content-Type': 'application/json' },
-            data: JSON.stringify(body),
-            async: true,
-            success: function (response) {
-                resolve(response);
-            }
-        });
+        try {
+            $.ajax({
+                url: url,
+                type: type,
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify(body),
+                complete: function (response) {
+                    console.log(response.responseJSON);
+                    resolve(response.responseJSON);
+                }
+            });   
+        } catch (error) {
+            console.log(error);
+        }
     });
 }
 

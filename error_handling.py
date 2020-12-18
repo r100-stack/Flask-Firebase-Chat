@@ -1,15 +1,23 @@
 from flask import jsonify
+from init_flask import engine
 
-def handle_error(func):
+# TODO: Remove exception rchd and conn closed comments
+def get_connection_and_handle_error(func):
     def try_catch():
         try:
-            func()
+            conn = engine.connect()
+            response = func(conn=conn)
         except Exception as ex:
+            print('Exception reached')
             print(ex)
-            return jsonify({
+            response = jsonify({
                 'success': False,
                 'error': str(ex)
-            }), 422
+            }), 500
+        finally:
+            print('Connection closed')
+            conn.close()
+        return response
     return try_catch
 
 def trial_decorator(func):
