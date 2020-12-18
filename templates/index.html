@@ -201,13 +201,11 @@
         var sender = form.find("input[name='sender']").val();
 
         var response = await sendPostMessage(message, sender);
-
-        var success = response['success']
-        if (success) {
+        parseResponse(onSuccess = () => {
             syncMessages();
-        } else {
+        }, onFailure = () => {
             alert('Error sending message');
-        }
+        });
     });
 </script>
 
