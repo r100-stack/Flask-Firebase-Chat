@@ -28,3 +28,10 @@ async function sendPostMessage(message, sender) {
     });
     return response;
 }
+
+async function sendDeleteMessage(messageId) {
+    response = await sendAjaxRequest('/messages', 'DELETE', {
+        'ID': messageId
+    });
+    return response;
+}
