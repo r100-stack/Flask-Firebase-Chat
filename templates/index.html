@@ -41,6 +41,83 @@
 <script src="../static/custom_ajax.js"></script>
 
 <script>
+    function populateDivWithEditMessage(div) {
+        // TODO: Make all vars with var.
+        var editDiv = $('<div class="edit_div">');
+        var textarea = div.find('textarea')[0];
+
+        if (textarea == null) {
+            var messageBox = div.find('.message').first();
+            var textarea = $('<textarea>');
+            textarea.val(messageBox.text());
+            
+            var editComplete = $('<button style="font-size:18px"><i class="material-icons">done</i></button>');
+            var editDiscard = $('<button style="font-size:18px"><i class="material-icons">cancel</i></button>');
+
+            editComplete.on('click', async function (event) {
+                var ID = div.attr('id');
+                var newMessage = textarea.val();
+
+                var response = await sendPatchMessage(ID, newMessage);
+                var success = response['success'];
+                if (success) {
+                    messageBox.text(newMessage);
+                    editDiv.remove();
+                }
+            });
+
+            editDiscard.on('click', async function (event) {
+                editDiv.remove();
+            })
+
+            editDiv.append($('<br><br>'));
+            editDiv.append(textarea);
+            editDiv.append($('<br>'));
+            editDiv.append(editComplete);
+            editDiv.append(editDiscard);
+
+            div.append(editDiv);
+        }
+    }
+
+    function populateDivWithMessage(div, message) {
+        div.empty();
+
+        title = $('<h3 class="message">');
+        subtitle = $('<h5 class="sender">');
+
+        title.text(message.message);
+        subtitle.text(message.sender);
+
+        div.append(title);
+        div.append(subtitle);
+
+        edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
+        edit.on('click', (event) => {
+            // TODO: Remove the testing append.
+            div = $(`div #${message.ID}`);
+            // test = $('<h2>Testing</h2>');
+            // div.append(test);
+            populateDivWithEditMessage(div);
+        })
+        div.append(edit);
+
+        _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
+        _delete.on('click', async (event) => {
+            response = await sendDeleteMessage(message.ID);
+
+            success = response['success']
+            if (success === true) { // TODO: if (success) everywhere
+                syncMessages();
+            } else {
+                // TODO: Must also catch exceptions when no response is received.
+                alert('Error deleting message');
+            }
+        });
+    }
+</script>
+
+<script>
     /**
      * Populates the list (div tag) with the passed list of messages
      * Each message in messages looks like 
@@ -55,30 +132,7 @@
         ul.empty();
         messages.forEach(message => {
             div = $(`<div id="${message.ID}" class="div-message">`);
-            title = $('<h3>');
-            subtitle = $('<h5>');
-
-            title.text(message.message);
-            subtitle.text(message.sender);
-
-            div.append(title);
-            div.append(subtitle);
-
-            edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
-            div.append(edit);
-
-            _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
-            _delete.on('click', async (event) => {
-                response = await sendDeleteMessage(message.ID);
-
-                success = response['success']
-                if (success === true) {
-                    syncMessages();
-                } else {
-                    // TODO: Must also catch exceptions when no response is received.
-                    alert('Error deleting message');
-                }
-            });
+            populateDivWithMessage(div, message);
             div.append(_delete);
 
             ul.append(div);

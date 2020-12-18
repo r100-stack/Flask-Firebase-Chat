@@ -39,3 +39,11 @@ async function sendDeleteMessage(ID) {
     });
     return response;
 }
+
+async function sendPatchMessage(ID, message) {
+    response = await sendAjaxRequest('/messages', 'PATCH', {
+        'ID': ID,
+        'message': message
+    });
+    return response;
+}

@@ -57,3 +57,17 @@ def delete_message(*args, **kwargs):
     return jsonify({
         'success': True
     })
+
+@app.route('/messages', methods=['PATCH'])
+@get_connection_and_handle_error
+def edit_message(*args, **kwargs):
+    conn = kwargs['conn']
+
+    ID = request.json['ID']
+    message = request.json['message']
+
+    conn.execute('update messages set message=%s where ID=%s;', (message, ID,))
+
+    return jsonify({
+        'success': True
+    })
