@@ -58,11 +58,12 @@
                 var newMessage = textarea.val();
 
                 var response = await sendPatchMessage(ID, newMessage);
-                var success = response['success'];
-                if (success) {
+                parseResponse(onSuccess = () => {
                     messageBox.text(newMessage);
                     editDiv.remove();
-                }
+                }, onFailure= () => {
+                    alert('Error editing message');
+                })
             });
 
             editDiscard.on('click', async function (event) {
