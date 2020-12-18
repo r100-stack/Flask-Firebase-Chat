@@ -49,7 +49,7 @@
             var messageBox = div.find('.message').first();
             var textarea = $('<textarea>');
             textarea.val(messageBox.text());
-            
+
             var editComplete = $('<button style="font-size:18px"><i class="material-icons">done</i></button>');
             var editDiscard = $('<button style="font-size:18px"><i class="material-icons">cancel</i></button>');
 
@@ -92,8 +92,8 @@
         div.append(subtitle);
 
         var edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
-        edit.on('click', (event) => {            
-            var div = $(`div #${message.ID}`);            
+        edit.on('click', (event) => {
+            var div = $(`div #${message.ID}`);
             populateDivWithEditMessage(div);
         })
         div.append(edit);
@@ -101,16 +101,32 @@
         var _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
         _delete.on('click', async (event) => {
             var response = await sendDeleteMessage(message.ID);
+            parseResponse(onSuccess = () => {
+                syncMessages(); // TODO: Deleing a messing must delete div, not resync messages
+            }, onFailure = () => {
+                alert('Error deleing messages');
+            })
+        });
+        div.append(_delete);
+    }
+
+    function parseResponse(onSuccess, onFailure) {
+        try {
+            if (response == null || !response.hasOwnProperty("success")) {
+                throw "No response received";
+            }
 
             var success = response['success']
             if (success) {
-                syncMessages();
+                onSuccess();
             } else {
                 // TODO: Must also catch exceptions when no response is received.
-                alert('Error deleting message');
+                throw "success = false";
             }
-        });
-        div.append(_delete);
+        } catch (error) {
+            console.log(error);
+            onFailure();
+        }
     }
 </script>
 
