@@ -18,6 +18,7 @@ def get_connection_and_handle_error(func):
             print('Connection closed')
             conn.close()
         return response
+    try_catch.__name__ = func.__name__
     return try_catch
 
 def trial_decorator(func):

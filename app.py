@@ -9,33 +9,25 @@ def index():
 
 # Returns a JSON response with the messages
 @app.route('/messages', methods=['GET'])
-def get_messages():
-    try:
-        conn = engine.connect()
-        results = conn.execute(
-            'select ID, message, sender from messages order by ID desc;')
+@get_connection_and_handle_error
+def get_messages(*args, **kwargs):
+    conn = kwargs['conn']
+    results = conn.execute(
+        'select ID1, message, sender from messages order by ID desc;')
 
-        messages = []
+    messages = []
 
-        for row in results:
-            messages.append({
-                'ID': row['ID'],
-                'message': row['message'],
-                'sender': row['sender']
-            })
-
-        conn.close()
-
-        return jsonify({
-            'success': True,
-            'messages': messages
+    for row in results:
+        messages.append({
+            'ID': row['ID'],
+            'message': row['message'],
+            'sender': row['sender']
         })
-    except Exception as ex:
-        print(ex)
-        return jsonify({
-            'success': False,
-            'error': str(ex)
-        }), 422
+
+    return jsonify({
+        'success': True,
+        'messages': messages
+    })
 
 # Adds a message to the database
 @app.route('/messages', methods=['POST'])
