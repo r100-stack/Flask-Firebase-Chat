@@ -61,9 +61,9 @@
                 parseResponse(onSuccess = () => {
                     messageBox.text(newMessage);
                     editDiv.remove();
-                }, onFailure= () => {
+                }, onFailure = () => {
                     alert('Error editing message');
-                })
+                });
             });
 
             editDiscard.on('click', async function (event) {
@@ -106,7 +106,7 @@
                 syncMessages(); // TODO: Deleing a messing must delete div, not resync messages
             }, onFailure = () => {
                 alert('Error deleing messages');
-            })
+            });
         });
         div.append(_delete);
     }
@@ -181,13 +181,11 @@
      */
     async function syncMessages() {
         var response = await sendGetMessages();
-
-        var success = response['success'];
-        if (success) {
+        parseResponse(onSuccess = () => {
             populate_messages(response['messages']);
-        } else {
+        }, onFailure = () => {
             alert('Error downloading messages');
-        }
+        });
     }
 </script>
 
