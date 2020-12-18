@@ -5,6 +5,7 @@
     <style>
         .div-message {
             border-style: solid;
+            margin-bottom: 16px;
         }
     </style>
 </head>
@@ -103,12 +104,13 @@
         _delete.on('click', async (event) => {
             var response = await sendDeleteMessage(message.ID);
             parseResponse(onSuccess = () => {
-                syncMessages(); // TODO: Deleing a messing must delete div, not resync messages
+                div.remove();
             }, onFailure = () => {
                 alert('Error deleing messages');
             });
         });
         div.append(_delete);
+        div.append($('<br><br>'));
     }
 
     function parseResponse(onSuccess, onFailure) {
@@ -148,7 +150,6 @@
             populateDivWithMessage(div, message);
 
             ul.append(div);
-            ul.append($('<br>'));
         });
     }
 </script>
