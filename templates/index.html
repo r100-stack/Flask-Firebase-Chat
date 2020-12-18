@@ -93,11 +93,8 @@
         div.append(subtitle);
 
         edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
-        edit.on('click', (event) => {
-            // TODO: Remove the testing append.
-            div = $(`div #${message.ID}`);
-            // test = $('<h2>Testing</h2>');
-            // div.append(test);
+        edit.on('click', (event) => {            
+            div = $(`div #${message.ID}`);            
             populateDivWithEditMessage(div);
         })
         div.append(edit);
@@ -107,7 +104,7 @@
             response = await sendDeleteMessage(message.ID);
 
             success = response['success']
-            if (success === true) { // TODO: if (success) everywhere
+            if (success) {
                 syncMessages();
             } else {
                 // TODO: Must also catch exceptions when no response is received.
@@ -170,7 +167,7 @@
         response = await sendGetMessages();
 
         success = response['success'];
-        if (success === true) {
+        if (success) {
             populate_messages(response['messages']);
         } else {
             alert('Error downloading messages');
@@ -192,7 +189,7 @@
         response = await sendPostMessage(message, sender);
 
         var success = response['success']
-        if (success === true) {
+        if (success) {
             syncMessages();
         } else {
             alert('Error sending message');
