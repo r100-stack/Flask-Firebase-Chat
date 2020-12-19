@@ -92,7 +92,7 @@
                 var newMessage = textarea.val();
 
                 var response = await sendPatchMessage(ID, newMessage);
-                parseResponse(onSuccess = () => {
+                parseResponse(response, onSuccess = () => { // TODO: As now parseResponse takes response, need to add to all method calls.
                     messageBox.text(newMessage);
                     editDiv.remove();
                 }, onFailure = () => {
@@ -127,10 +127,10 @@
         div.append(subtitle);
 
         var edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
-        // edit.on('click', (event) => {
-        //     var div = $(`div #${message.ID}`);
-        //     populateDivWithEditMessage(div);
-        // }) // TODO: Missing ;. Update in Flask version also
+        edit.on('click', (event) => {
+            var div = $(`div #${message.ID}`);
+            populateDivWithEditMessage(div);
+        }); // TODO: Missing ;. Update in Flask version also
         div.append(edit);
 
         var _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');

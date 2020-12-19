@@ -45,6 +45,19 @@ async function sendDeleteMessage(ID) {
 }
 
 async function sendPatchMessage(ID, message) {
+    return new Promise(async resolve => {
+        await db.collection("messages").doc(ID).update({
+            message: message
+        })
+        .then(function() {
+            console.log('update successful');
+            resolve({'success': true});
+        })
+        .catch(function(error) {
+            console.log(error);
+            resolve({'success': false});
+        });
+    });
     response = await sendAjaxRequest('/messages', 'PATCH', {
         'ID': ID,
         'message': message
