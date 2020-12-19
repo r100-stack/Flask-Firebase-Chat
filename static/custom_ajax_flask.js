@@ -4,7 +4,7 @@
  * Sends an ajax request of the specified type to the specified url and with the specified body
  * @param {string} url url of where to send the request to
  * @param {string} type type of the request. Eg. GET, POST, PATCH, DELETE
- * @param {string|object} body body of the request. Eg. {"ID": 5} to delete the message with ID=5 // TODO: Change all jsons to object in docs
+ * @param {string|object} body body of the request. Eg. {"ID": 5} to delete the message with ID=5
  * @returns {Promise<object>} A promise containing messages // TODO: Add returns for all functions where applicable
  */
 function sendAjaxRequest(url, type, body) {
