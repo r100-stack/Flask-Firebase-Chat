@@ -1,5 +1,3 @@
-// TODO: Make custom_ajax to custom_ajax_flask.js
-
 function sendAjaxRequest(url, type, body) {
     return new Promise(resolve => {
         try {
@@ -19,9 +17,20 @@ function sendAjaxRequest(url, type, body) {
     });
 }
 
-async function sendGetMessages() {
-    response = await sendAjaxRequest('/messages', 'GET', null);
-    return response;
+function sendGetMessages(onChange) {
+    db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
+        var messages = [];
+
+        querySnapshot.forEach((doc) => {
+            messages.push({
+                'ID': doc.id,
+                'message': doc.data()['message'],
+                'sender': doc.data()['sender']
+            });
+        });
+
+        onChange(messages);
+    });
 }
 
 /**
