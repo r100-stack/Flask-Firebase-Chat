@@ -59,7 +59,7 @@
                 var newMessage = textarea.val();
 
                 var response = await sendPatchMessage(ID, newMessage);
-                parseResponse(onSuccess = () => {
+                parseResponse(response, onSuccess = () => {
                     messageBox.text(newMessage);
                     editDiv.remove();
                 }, onFailure = () => {
@@ -103,7 +103,7 @@
         var _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
         _delete.on('click', async (event) => {
             var response = await sendDeleteMessage(message.ID);
-            parseResponse(onSuccess = () => {
+            parseResponse(response, onSuccess = () => {
                 div.remove();
             }, onFailure = () => {
                 alert('Error deleing messages');
@@ -113,7 +113,7 @@
         div.append($('<br><br>'));
     }
 
-    function parseResponse(onSuccess, onFailure) {
+    function parseResponse(response, onSuccess, onFailure) {
         try {
             if (response == null || !response.hasOwnProperty("success")) {
                 throw "No response received";
@@ -181,7 +181,7 @@
      */
     async function syncMessages() {
         var response = await sendGetMessages();
-        parseResponse(onSuccess = () => {
+        parseResponse(response, onSuccess = () => {
             populate_messages(response['messages']);
         }, onFailure = () => {
             alert('Error downloading messages');
@@ -201,7 +201,7 @@
         var sender = form.find("input[name='sender']").val();
 
         var response = await sendPostMessage(message, sender);
-        parseResponse(onSuccess = () => {
+        parseResponse(response, onSuccess = () => {
             syncMessages();
         }, onFailure = () => {
             alert('Error sending message');

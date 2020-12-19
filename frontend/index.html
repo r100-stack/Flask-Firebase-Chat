@@ -90,7 +90,7 @@
                 var newMessage = textarea.val();
 
                 var response = await sendPatchMessage(ID, newMessage);
-                parseResponse(response, onSuccess = () => { // TODO: As now parseResponse takes response, need to add to all method calls.
+                parseResponse(response, onSuccess = () => {
                     messageBox.text(newMessage);
                     editDiv.remove();
                 }, onFailure = () => {
