@@ -1,3 +1,5 @@
+<!-- TODO: Changed index1.html to index.html and delete index.html -->
+
 <html>
 
 <head>
@@ -5,13 +7,15 @@
     <style>
         .div-message {
             border-style: solid;
+            margin-bottom: 16px;
         }
     </style>
 </head>
 
 <body>
-    <h1>Welcome to Flask Chat Backend</h1>
+    <h1>Welcome to Flask Chat</h1>
 
+    <!-- Form that contains message and sender input options. -->
     <form action="/messages" method="POST">
         <label>Sender</label>
         <br>
@@ -31,6 +35,15 @@
 
 </body>
 
+<!-- Dependencies -->
+<!-- 1. jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 2. Icons for edit and delete -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- 3. Our js file with code to send requests to backend -->
+<script src="./custom_ajax_firebase.js"></script>
+
+<!-- 4. All Firebase/Firestore dependencies -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -59,43 +72,182 @@
 
     var db = firebase.firestore();
 </script>
+<!-- End of Firebase/Firestore dependencies -->
 
 <script>
-    db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
-        ul = $('#ul-messages');
+    function populateDivWithEditMessage(div) {
+        var editDiv = $('<div class="edit_div">');
+        var textarea = div.find('textarea')[0];
+
+        if (textarea == null) {
+            var messageBox = div.find('.message').first();
+            var textarea = $('<textarea>');
+            textarea.val(messageBox.text());
+
+            var editComplete = $('<button style="font-size:18px"><i class="material-icons">done</i></button>');
+            var editDiscard = $('<button style="font-size:18px"><i class="material-icons">cancel</i></button>');
+
+            editComplete.on('click', async function (event) {
+                var ID = div.attr('id');
+                var newMessage = textarea.val();
+
+                var response = await sendPatchMessage(ID, newMessage);
+                parseResponse(response, onSuccess = () => { // TODO: As now parseResponse takes response, need to add to all method calls.
+                    messageBox.text(newMessage);
+                    editDiv.remove();
+                }, onFailure = () => {
+                    alert('Error editing message');
+                });
+            });
+
+            editDiscard.on('click', async function (event) {
+                editDiv.remove();
+            })
+
+            editDiv.append($('<br><br>'));
+            editDiv.append(textarea);
+            editDiv.append($('<br>'));
+            editDiv.append(editComplete);
+            editDiv.append(editDiscard);
+
+            div.append(editDiv);
+        }
+    }
+
+    function populateDivWithMessage(div, message) {
+        div.empty();
+
+        var title = $('<h3 class="message">');
+        var subtitle = $('<h5 class="sender">');
+
+        title.text(message.message);
+        subtitle.text(message.sender);
+
+        div.append(title);
+        div.append(subtitle);
+
+        var edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
+        edit.on('click', (event) => {
+            var div = $(`div #${message.ID}`);
+            populateDivWithEditMessage(div);
+        }); // TODO: Missing ;. Update in Flask version also
+        div.append(edit);
+
+        var _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
+        _delete.on('click', async (event) => {
+            var response = await sendDeleteMessage(message.ID);
+            parseResponse(response, onSuccess = () => {
+                div.remove();
+            }, onFailure = () => {
+                alert('Error deleing messages');
+            });
+        });
+        div.append(_delete);
+        div.append($('<br><br>'));
+    }
+
+    function parseResponse(response, onSuccess, onFailure) { // TODO: parseResponse doesn't take a response!!!! Must update even in the Flask version.
+        try {
+            if (response == null || !response.hasOwnProperty("success")) {
+                throw "No response received";
+            }
+
+            var success = response['success']
+            if (success) {
+                onSuccess();
+            } else {
+                throw "success = false";
+            }
+        } catch (error) {
+            console.log(error);
+            onFailure();
+        }
+    }
+</script>
+
+<script>
+    /**
+     * Populates the list (div tag) with the passed list of messages
+     * Each message in messages looks like 
+     * {
+     *  "ID": 5,
+     *  "message": "Sample message",
+     *  "sender": "John Doe"
+     * }
+     */
+    function populate_messages(messages) {
+        var ul = $('#ul-messages');
         ul.empty();
-
-        querySnapshot.forEach((doc) => {
-            div = $('<div class="div-message">');
-            title = $('<h3>');
-            subtitle = $('<h5>');
-
-            title.text(doc.data()['message']);
-            subtitle.text(doc.data()['sender']);
-
-            div.append(title);
-            div.append(subtitle);
+        messages.forEach(message => {
+            var div = $(`<div id="${message.ID}" class="div-message">`);
+            populateDivWithMessage(div, message);
 
             ul.append(div);
-            ul.append($('<br>'));
+        });
+    }
+</script>
+
+<script>
+    /**
+     * Sends an AJAX request GET /messages to get the messages
+     * Sample response:
+     * {
+        "messages": [
+            {
+                "ID": 3,
+                "message": "Hi there",
+                "sender": "Steve"
+            },
+            {
+                "ID": 2,
+                "message": "Hello",
+                "sender": "Mike the Tiger"
+            },
+            {
+                "ID": 1,
+                "message": "Hi",
+                "sender": "Mike the Tiger"
+            }
+        ],
+            "success": true
+    }
+     */
+    async function syncMessages() {
+        sendGetMessages(onChange = (messages) => {
+            populate_messages(messages); // TODO: Change to populateMessages in both html files.
+        })
+
+        // var response = await sendGetMessages();
+        // parseResponse(onSuccess = () => {
+        //     populate_messages(response['messages']);
+        // }, onFailure = () => {
+        //     alert('Error downloading messages');
+        // });
+    }
+</script>
+
+<script>
+    /**
+     * Intercepts the submit action on the form and overrides it with a custom action
+     */
+    var form = $('form');
+    form.on('submit', async function (event) {
+        event.preventDefault();
+
+        var message = form.find("textarea[name='message']").val();
+        var sender = form.find("input[name='sender']").val();
+
+        var response = await sendPostMessage(message, sender);
+        // TODO: Might only have to call syncMessages once. Hence, delete syncMessages in all onSuccess
+        parseResponse(response, onSuccess = () => {}, onFailure = () => {
+            alert('Error sending message');
         });
     });
 </script>
 
 <script>
-    form = $('form');
-    form.on('submit', function (event) {
-        event.preventDefault();
-
-        message = form.find("textarea[name='message']").val();
-        sender = form.find("input[name='sender']").val();
-
-        db.collection("messages").add({
-            message: message,
-            sender: sender,
-            timestamp: firebase.firestore.Timestamp.now()
-        });
-    })
+    // Calling syncMessages() once when the page starts to get the latest messages.
+    syncMessages();
 </script>
 
 </html>
