@@ -1,7 +1,12 @@
 from flask import jsonify
 from init_flask import engine
 
+
 def get_connection_and_handle_error(func):
+    """Python decorator to do a try catch.
+    On success returns http response 200.
+    On failure returns http response 500."""
+
     def try_catch():
         try:
             conn = engine.connect()
@@ -18,8 +23,11 @@ def get_connection_and_handle_error(func):
     try_catch.__name__ = func.__name__
     return try_catch
 
+
+# TODO: Delete trail decorator and related functions, etc.
 def trial_decorator(func):
     name = 'Hello World'
+
     def trial_inner():
         func(name)
         func(name)

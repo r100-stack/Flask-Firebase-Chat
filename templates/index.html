@@ -42,6 +42,11 @@
 <script src="../static/custom_ajax_flask.js"></script>
 
 <script>
+    /**
+     * Add edit message elements to a message div. (Textbox, update/cancel buttons)
+     * @param {object} div the message div to which the edit message elements have to be added
+     * @returns {null}
+     */
     function populateDivWithEditMessage(div) {
         var editDiv = $('<div class="edit_div">');
         var textarea = div.find('textarea')[0];
@@ -81,6 +86,12 @@
         }
     }
 
+    /**
+     * Fills a div with UI contents of the message. (Message text, sender name, edit/delete buttons)
+     * @param {object} div the div to fill with contents of a message
+     * @param {string} message the message whose contents are filled in the div
+     * @returns {null}
+     */
     function populateDivWithMessage(div, message) {
         div.empty();
 
@@ -93,6 +104,7 @@
         div.append(title);
         div.append(subtitle);
 
+        // EDIT MESSAGE
         var edit = $('<button style="font-size:18px"><i class="material-icons">mode_edit</i></button>');
         edit.on('click', (event) => {
             var div = $(`div #${message.ID}`);
@@ -100,6 +112,7 @@
         });
         div.append(edit);
 
+        // DELETE MESSAGE
         var _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
         _delete.on('click', async (event) => {
             var response = await sendDeleteMessage(message.ID);
@@ -113,6 +126,13 @@
         div.append($('<br><br>'));
     }
 
+    /**
+     * Runs onSuccess if the response is valid or onFailure if it is not
+     * @param {object} response the response returned
+     * @param {() => null} onSuccess the function to be executed when the response is valid 
+     * @param {() => null} onFailure the function to be executed when the response is invalid
+     * @returns {null}
+     */
     function parseResponse(response, onSuccess, onFailure) {
         try {
             if (response == null || !response.hasOwnProperty("success")) {
@@ -134,8 +154,11 @@
 
 <script>
     /**
-     * Populates the list (div tag) with the passed list of messages
-     * Each message in messages looks like 
+     * Populates the list element with the passed list of messages
+     * @param {string|object} messages the messages to populate the list with // TODO: Make use of | for multiple possible types.
+     * @returns {null}
+     * 
+     * Each message in messages looks like // TODO: May need to delete the samples in the documentation. Can include it in the README.md
      * {
      *  "ID": 5,
      *  "message": "Sample message",
@@ -156,7 +179,9 @@
 
 <script>
     /**
-     * Sends an AJAX request GET /messages to get the messages
+     * Download the latest messages and display it
+     * @returns {null}
+     * 
      * Sample response:
      * {
         "messages": [
@@ -191,6 +216,7 @@
 
 <script>
     /**
+     * CREATE MESSAGE
      * Intercepts the submit action on the form and overrides it with a custom action
      */
     var form = $('form');
@@ -210,7 +236,7 @@
 </script>
 
 <script>
-    // Calling syncMessages() once when the page starts to get the latest messages.
+    // Calling syncMessages() once when the page starts to get the latest messages
     syncMessages();
 </script>
 
