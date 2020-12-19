@@ -1,5 +1,3 @@
-// TODO: Make custom_ajax to custom_ajax_flask.js
-
 function sendAjaxRequest(url, type, body) {
     return new Promise(resolve => {
         try {
