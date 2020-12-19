@@ -5,7 +5,7 @@
  * @param {string} url url of where to send the request to
  * @param {string} type type of the request. Eg. GET, POST, PATCH, DELETE
  * @param {string|object} body body of the request. Eg. {"ID": 5} to delete the message with ID=5
- * @returns {Promise<object>} A promise containing messages // TODO: Add returns for all functions where applicable
+ * @returns {Promise<object>} A promise containing messages
  */
 function sendAjaxRequest(url, type, body) {
     return new Promise(resolve => {
