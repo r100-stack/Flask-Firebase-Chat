@@ -229,7 +229,6 @@
         var sender = form.find("input[name='sender']").val();
 
         var response = await sendPostMessage(message, sender);
-        // TODO: Might only have to call syncMessages once. Hence, delete syncMessages in all onSuccess
         parseResponse(response, onSuccess = () => {}, onFailure = () => {
             alert('Error sending message');
         });
