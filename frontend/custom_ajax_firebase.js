@@ -26,7 +26,6 @@ function sendGetMessages(onChange) {
  * @param {string} sender sender of the message
  * @returns {Promise<object>} JSON object with a success param
  */
-// TODO: Need to update docs and add more meaningful docs
 async function sendPostMessage(message, sender) {
     return new Promise(async resolve => {
         await db.collection("messages").add({
