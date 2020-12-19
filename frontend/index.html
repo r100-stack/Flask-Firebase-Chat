@@ -173,7 +173,7 @@
      *  "sender": "John Doe"
      * }
      */
-    function populate_messages(messages) {
+    function populateMessages(messages) {
         var ul = $('#ul-messages');
         ul.empty();
         messages.forEach(message => {
@@ -212,7 +212,7 @@
      */
     async function syncMessages() {
         sendGetMessages(onChange = (messages) => {
-            populate_messages(messages); // TODO: Change to populateMessages in both html files.
+            populateMessages(messages);
         })
     }
 </script>

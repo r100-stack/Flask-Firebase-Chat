@@ -142,7 +142,7 @@
      *  "sender": "John Doe"
      * }
      */
-    function populate_messages(messages) {
+    function populateMessages(messages) {
         var ul = $('#ul-messages');
         ul.empty();
         messages.forEach(message => {
@@ -182,7 +182,7 @@
     async function syncMessages() {
         var response = await sendGetMessages();
         parseResponse(response, onSuccess = () => {
-            populate_messages(response['messages']);
+            populateMessages(response['messages']);
         }, onFailure = () => {
             alert('Error downloading messages');
         });
