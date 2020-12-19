@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template, request
-from init_flask import app, engine
+from init_flask import app
 from error_handling import get_connection_and_handle_error
 
 
