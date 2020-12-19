@@ -22,13 +22,3 @@ def get_connection_and_handle_error(func):
         return response
     try_catch.__name__ = func.__name__
     return try_catch
-
-
-# TODO: Delete trail decorator and related functions, etc.
-def trial_decorator(func):
-    name = 'Hello World'
-
-    def trial_inner():
-        func(name)
-        func(name)
-    return trial_inner
