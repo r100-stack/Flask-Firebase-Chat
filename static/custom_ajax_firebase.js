@@ -58,9 +58,4 @@ async function sendPatchMessage(ID, message) {
             resolve({'success': false});
         });
     });
-    response = await sendAjaxRequest('/messages', 'PATCH', {
-        'ID': ID,
-        'message': message
-    });
-    return response;
 }
