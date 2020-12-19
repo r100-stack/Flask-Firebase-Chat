@@ -1,24 +1,6 @@
-function sendAjaxRequest(url, type, body) {
-    return new Promise(resolve => {
-        try {
-            $.ajax({
-                url: url,
-                type: type,
-                headers: { 'Content-Type': 'application/json' },
-                data: JSON.stringify(body),
-                complete: function (response) {
-                    console.log(response.responseJSON);
-                    resolve(response.responseJSON);
-                }
-            });   
-        } catch (error) {
-            console.log(error);
-        }
-    });
-}
-
 function sendGetMessages(onChange) {
     db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
+
         var messages = [];
 
         querySnapshot.forEach((doc) => {
@@ -36,12 +18,23 @@ function sendGetMessages(onChange) {
 /**
  * Send a POST /messages request to add a message to the database
  */
+// TODO: Need to update docs and add more meaningful docs
 async function sendPostMessage(message, sender) {
-    response = await sendAjaxRequest('/messages', 'POST', {
-        'message': message,
-        'sender': sender
+    return new Promise(async resolve => {
+        await db.collection("messages").add({
+            message: message,
+            sender: sender,
+            timestamp: firebase.firestore.Timestamp.now()
+        })
+        .then(function() {
+            console.log('insert successful');
+            resolve({'success': true});
+        })
+        .catch(function(error) {
+            console.log(error);
+            resolve({'success': false});
+        });
     });
-    return response;
 }
 
 async function sendDeleteMessage(ID) {
