@@ -51,7 +51,7 @@ async function sendPostMessage(message, sender) {
 
 /**
  * Send a DELETE /messages request to delete a message from the database
- * @param {number} ID ID of the message to delete // TODO: Make all ID in docs to number
+ * @param {number} ID ID of the message to delete
  * @returns {object} JSON object with a success param
  */
 async function sendDeleteMessage(ID) {
