@@ -8,16 +8,7 @@
 function sendAjaxRequest(url, type, body) {
     return new Promise(resolve => {
         try {
-            $.ajax({
-                url: url,
-                type: type,
-                headers: { 'Content-Type': 'application/json' },
-                data: JSON.stringify(body),
-                complete: function (response) {
-                    console.log(response.responseJSON);
-                    resolve(response.responseJSON);
-                }
-            });
+            resolve(null);
         } catch (error) {
             console.log(error);
         }
@@ -29,8 +20,7 @@ function sendAjaxRequest(url, type, body) {
  * @returns {object} messages as a JSON array of JSON objects (messages)
  */
 async function sendGetMessages() {
-    response = await sendAjaxRequest('/messages', 'GET', null);
-    return response;
+    return null;
 }
 
 /**
@@ -40,11 +30,7 @@ async function sendGetMessages() {
  * @returns {object} JSON object with a success param
  */
 async function sendPostMessage(message, sender) {
-    response = await sendAjaxRequest('/messages', 'POST', {
-        'message': message,
-        'sender': sender
-    });
-    return response;
+    return null;
 }
 
 /**
@@ -53,10 +39,7 @@ async function sendPostMessage(message, sender) {
  * @returns {object} JSON object with a success param
  */
 async function sendDeleteMessage(ID) {
-    response = await sendAjaxRequest('/messages', 'DELETE', {
-        'ID': ID
-    });
-    return response;
+    return null;
 }
 
 /**
@@ -66,9 +49,5 @@ async function sendDeleteMessage(ID) {
  * @returns {object} JSON object with a success param
  */
 async function sendPatchMessage(ID, message) {
-    response = await sendAjaxRequest('/messages', 'PATCH', {
-        'ID': ID,
-        'message': message
-    });
-    return response;
+    return null;
 }

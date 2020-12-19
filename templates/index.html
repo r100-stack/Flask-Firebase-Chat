@@ -157,13 +157,6 @@
      * Populates the list element with the passed list of messages
      * @param {string|object} messages the messages to populate the list with
      * @returns {null}
-     * 
-     * Each message in messages looks like // TODO: May need to delete the samples in the documentation. Can include it in the README.md
-     * {
-     *  "ID": 5,
-     *  "message": "Sample message",
-     *  "sender": "John Doe"
-     * }
      */
     function populateMessages(messages) {
         var ul = $('#ul-messages');
@@ -181,28 +174,6 @@
     /**
      * Download the latest messages and display it
      * @returns {null}
-     * 
-     * Sample response:
-     * {
-        "messages": [
-            {
-                "ID": 3,
-                "message": "Hi there",
-                "sender": "Steve"
-            },
-            {
-                "ID": 2,
-                "message": "Hello",
-                "sender": "Mike the Tiger"
-            },
-            {
-                "ID": 1,
-                "message": "Hi",
-                "sender": "Mike the Tiger"
-            }
-        ],
-            "success": true
-    }
      */
     async function syncMessages() {
         var response = await sendGetMessages();

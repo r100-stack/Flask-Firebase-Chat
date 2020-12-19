@@ -41,37 +41,6 @@
 <!-- 3. Our js file with code to send requests to backend -->
 <script src="./custom_ajax_firebase.js"></script>
 
-<!-- 4. All Firebase/Firestore dependencies -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
-
-<script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-        apiKey: "AIzaSyAW2ELiIJpHrkU40So9iOqePeGBcgfOB-E",
-        authDomain: "flaskchat-6684a.firebaseapp.com",
-        databaseURL: "https://flaskchat-6684a.firebaseio.com",
-        projectId: "flaskchat-6684a",
-        storageBucket: "flaskchat-6684a.appspot.com",
-        messagingSenderId: "94841685089",
-        appId: "1:94841685089:web:f1abf658720a87403cd620",
-        measurementId: "G-FWENEM06PJ"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    // firebase.analytics();
-
-    var db = firebase.firestore();
-</script>
-<!-- End of Firebase/Firestore dependencies -->
-
 <script>
     /**
      * Add edit message elements to a message div. (Textbox, update/cancel buttons)
@@ -188,13 +157,6 @@
      * Populates the list element with the passed list of messages
      * @param {string|object} messages the messages to populate the list with
      * @returns {null}
-     * 
-     * Each message in messages looks like
-     * {
-     *  "ID": 5,
-     *  "message": "Sample message",
-     *  "sender": "John Doe"
-     * }
      */
     function populateMessages(messages) {
         var ul = $('#ul-messages');
@@ -212,28 +174,6 @@
     /**
      * Download the latest messages and display it
      * @returns {null}
-     * 
-     * Sample response:
-     * {
-        "messages": [
-            {
-                "ID": 3,
-                "message": "Hi there",
-                "sender": "Steve"
-            },
-            {
-                "ID": 2,
-                "message": "Hello",
-                "sender": "Mike the Tiger"
-            },
-            {
-                "ID": 1,
-                "message": "Hi",
-                "sender": "Mike the Tiger"
-            }
-        ],
-            "success": true
-    }
      */
     async function syncMessages() {
         sendGetMessages(onChange = (messages) => {
