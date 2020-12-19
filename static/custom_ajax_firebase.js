@@ -38,10 +38,17 @@ async function sendPostMessage(message, sender) {
 }
 
 async function sendDeleteMessage(ID) {
-    response = await sendAjaxRequest('/messages', 'DELETE', {
-        'ID': ID
+    return new Promise(async resolve => {
+        await db.collection("messages").doc(ID).delete()
+        .then(function() {
+            console.log('delete successful');
+            resolve({'success': true});
+        })
+        .catch(function(error) {
+            console.log(error);
+            resolve({'success': false});
+        });
     });
-    return response;
 }
 
 async function sendPatchMessage(ID, message) {
