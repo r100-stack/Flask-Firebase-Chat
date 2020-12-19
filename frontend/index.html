@@ -128,7 +128,7 @@
         edit.on('click', (event) => {
             var div = $(`div #${message.ID}`);
             populateDivWithEditMessage(div);
-        }); // TODO: Missing ;. Update in Flask version also
+        });
         div.append(edit);
 
         var _delete = $('<button style="font-size:18px"><i class="material-icons">delete</i></button>');
@@ -214,13 +214,6 @@
         sendGetMessages(onChange = (messages) => {
             populate_messages(messages); // TODO: Change to populateMessages in both html files.
         })
-
-        // var response = await sendGetMessages();
-        // parseResponse(onSuccess = () => {
-        //     populate_messages(response['messages']);
-        // }, onFailure = () => {
-        //     alert('Error downloading messages');
-        // });
     }
 </script>
 
