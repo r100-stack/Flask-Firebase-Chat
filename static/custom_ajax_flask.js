@@ -1,5 +1,3 @@
-// TODO: May need to move this file in /templates ?
-
 /**
  * Sends an ajax request of the specified type to the specified url and with the specified body
  * @param {string} url url of where to send the request to
