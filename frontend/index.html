@@ -144,7 +144,7 @@
         div.append($('<br><br>'));
     }
 
-    function parseResponse(response, onSuccess, onFailure) { // TODO: parseResponse doesn't take a response!!!! Must update even in the Flask version.
+    function parseResponse(response, onSuccess, onFailure) {
         try {
             if (response == null || !response.hasOwnProperty("success")) {
                 throw "No response received";
