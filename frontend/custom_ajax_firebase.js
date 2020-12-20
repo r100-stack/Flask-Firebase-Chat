@@ -33,19 +33,6 @@ async function sendPostMessage(message, sender) {
         // TODO (4): Within the function, resolve({ 'success': true });
         // TODO (5): .add({}).then(function () {}) .catch(function(error) {})
         // TODO (6): Within the function, resolve({ 'success': false });
-        await db.collection("messages").add({
-            message: message,
-            sender: sender,
-            timestamp: firebase.firestore.Timestamp.now()
-        })
-            .then(function () {
-                console.log('insert successful');
-                resolve({ 'success': true });
-            })
-            .catch(function (error) {
-                console.log(error);
-                resolve({ 'success': false });
-            });
     });
 }
 
