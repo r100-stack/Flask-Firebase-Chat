@@ -4,9 +4,6 @@
  * @returns {null}
  */
 function sendGetMessages(onChange) {
-    // TODO (2): db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {}
-    // TODO (3): Within the method, generate a list of messages from the querySnapshot
-    // TODO (4): Call onChange() with the messages list passed as a parameter
     db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
         var messages = [];
 
@@ -29,7 +26,27 @@ function sendGetMessages(onChange) {
  * @returns {Promise<object>} JSON object with a success param
  */
 async function sendPostMessage(message, sender) {
-    return null;
+    return new Promise(async resolve => {
+        // TODO (1): db.collection.add()
+        // TODO (2): Pass the following as a parameter to add: {message: message, sender: sender, timestamp: firebase.firestore.Timestamp.now()}
+        // TODO (3): .add({}).then(function () {})
+        // TODO (4): Within the function, resolve({ 'success': true });
+        // TODO (5): .add({}).then(function () {}) .catch(function(error) {})
+        // TODO (6): Within the function, resolve({ 'success': false });
+        await db.collection("messages").add({
+            message: message,
+            sender: sender,
+            timestamp: firebase.firestore.Timestamp.now()
+        })
+            .then(function () {
+                console.log('insert successful');
+                resolve({ 'success': true });
+            })
+            .catch(function (error) {
+                console.log(error);
+                resolve({ 'success': false });
+            });
+    });
 }
 
 /**
