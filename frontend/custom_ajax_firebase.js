@@ -7,19 +7,7 @@ function sendGetMessages(onChange) {
     // TODO (2): db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {}
     // TODO (3): Within the method, generate a list of messages from the querySnapshot
     // TODO (4): Call onChange() with the messages list passed as a parameter
-    db.collection("messages").orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
-        var messages = [];
-
-        querySnapshot.forEach((doc) => {
-            messages.push({
-                'ID': doc.id,
-                'message': doc.data()['message'],
-                'sender': doc.data()['sender']
-            });
-        });
-
-        onChange(messages);
-    });
+    return null;
 }
 
 /**
