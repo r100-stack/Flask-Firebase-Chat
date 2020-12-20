@@ -71,19 +71,3 @@ def delete_message(*args, **kwargs):
 # TODO (5): Use request.json[key] to extract the 'ID' and 'message' keys.
 # TODO (6): Execute update messages set message=%s where ID=%s;
 # TODO (7): return jsonify {'success': True}
-
-@app.route('/messages', methods=['PATCH'])
-@get_connection_and_handle_error
-def edit_message(*args, **kwargs):
-    """PATCH /messages - Edits a message in the database."""
-
-    conn = kwargs['conn']
-
-    ID = request.json['ID']
-    message = request.json['message']
-
-    conn.execute('update messages set message=%s where ID=%s;', (message, ID,))
-
-    return jsonify({
-        'success': True
-    })
