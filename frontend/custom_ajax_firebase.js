@@ -76,16 +76,5 @@ async function sendPatchMessage(ID, message) {
         // TODO (4): Within the function, resolve({ 'success': true });
         // TODO (5): .update({}).then(function () {}) .catch(function () {})
         // TODO (6): Within the function, resolve({ 'success': false });
-        await db.collection("messages").doc(ID).update({
-            message: message
-        })
-            .then(function () {
-                console.log('update successful');
-                resolve({ 'success': true });
-            })
-            .catch(function (error) {
-                console.log(error);
-                resolve({ 'success': false });
-            });
     });
 }
