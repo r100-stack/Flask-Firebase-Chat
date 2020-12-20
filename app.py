@@ -47,3 +47,27 @@ def add_message(*args, **kwargs):
     return jsonify({
         'success': True
     })
+
+# TODO (1): Use @app.route to create a DELETE /messages endpoint
+# TODO (2): Use the @get_connection_and_handle_error decorator from error_handling.py
+# TODO (3): Create a method delete_message(*args, **kwargs)
+
+# TODO (4): Within the method, get the connection that get_connection_and_handle_error gives. ie. conn = kwargs['conn']
+# TODO (5): Use request.json[key] to extract the 'ID' key.
+# TODO (6): Execute delete from messages where ID=%s;
+# TODO (7): return jsonify {'success': True}
+
+@app.route('/messages', methods=['DELETE'])
+@get_connection_and_handle_error
+def delete_message(*args, **kwargs):
+    """DELETE /messages - Deletes a message from the database."""
+
+    conn = kwargs['conn']
+
+    ID = request.json['ID']
+
+    conn.execute('delete from messages where ID=%s;', (ID,))
+
+    return jsonify({
+        'success': True
+    })
