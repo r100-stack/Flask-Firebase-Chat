@@ -50,11 +50,6 @@ async function sendPostMessage(message, sender) {
  */
 async function sendDeleteMessage(ID) {
     return new Promise(async resolve => {
-        // TODO (1): db.collection('messages').doc(ID).delete()
-        // TODO (2): .delete().then(function () {})
-        // TODO (3): Within the function, resolve({ 'success': true });
-        // TODO (4): .delete().then(function () {}) .catch(function () {})
-        // TODO (5): Within the function, resolve({ 'success': false });
         await db.collection("messages").doc(ID).delete()
             .then(function () {
                 console.log('delete successful');
@@ -74,5 +69,23 @@ async function sendDeleteMessage(ID) {
  * @returns {Promise<object>} JSON object with a success param
  */
 async function sendPatchMessage(ID, message) {
-    return null;
+    return new Promise(async resolve => {
+        // TODO (1): db.collection('messages').doc(ID).update()
+        // TODO (2): Pass the following as a parameter to update: {message: message}
+        // TODO (3): .update({}).then(function () {})
+        // TODO (4): Within the function, resolve({ 'success': true });
+        // TODO (5): .update({}).then(function () {}) .catch(function () {})
+        // TODO (6): Within the function, resolve({ 'success': false });
+        await db.collection("messages").doc(ID).update({
+            message: message
+        })
+            .then(function () {
+                console.log('update successful');
+                resolve({ 'success': true });
+            })
+            .catch(function (error) {
+                console.log(error);
+                resolve({ 'success': false });
+            });
+    });
 }
