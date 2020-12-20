@@ -27,12 +27,6 @@ function sendGetMessages(onChange) {
  */
 async function sendPostMessage(message, sender) {
     return new Promise(async resolve => {
-        // TODO (1): db.collection.add()
-        // TODO (2): Pass the following as a parameter to add: {message: message, sender: sender, timestamp: firebase.firestore.Timestamp.now()}
-        // TODO (3): .add({}).then(function () {})
-        // TODO (4): Within the function, resolve({ 'success': true });
-        // TODO (5): .add({}).then(function () {}) .catch(function(error) {})
-        // TODO (6): Within the function, resolve({ 'success': false });
         await db.collection("messages").add({
             message: message,
             sender: sender,
@@ -55,7 +49,22 @@ async function sendPostMessage(message, sender) {
  * @returns {Promise<object>} JSON object with a success param
  */
 async function sendDeleteMessage(ID) {
-    return null;
+    return new Promise(async resolve => {
+        // TODO (1): db.collection('messages').doc(ID).delete()
+        // TODO (2): .delete().then(function () {})
+        // TODO (3): Within the function, resolve({ 'success': true });
+        // TODO (4): .delete().then(function () {}) .catch(function () {})
+        // TODO (5): Within the function, resolve({ 'success': false });
+        await db.collection("messages").doc(ID).delete()
+            .then(function () {
+                console.log('delete successful');
+                resolve({ 'success': true });
+            })
+            .catch(function (error) {
+                console.log(error);
+                resolve({ 'success': false });
+            });
+    });
 }
 
 /**
