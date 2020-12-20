@@ -1,4 +1,3 @@
-# TODO (1): from flask, also import request
 from flask import Flask, jsonify, render_template, request
 from init_flask import app
 from error_handling import get_connection_and_handle_error
@@ -31,15 +30,6 @@ def get_messages(*args, **kwargs):
         'success': True,
         'messages': messages
     })
-
-# TODO (2): Use @app.route to create a POST /messages endpoint
-# TODO (3): Use the @get_connection_and_handle_error decorator from error_handling.py
-# TODO (4): Create a method add_message(*args, **kwargs)
-
-# TODO (5): Within the method, get the connection that get_connection_and_handle_error gives. ie. conn = kwargs['conn']
-# TODO (6): Use request.json[key] to extract the 'message' and 'sender' keys.
-# TODO (7): Execute insert into messages (message, sender) values (%s, %s); Here the values are the extracted keys from the request.
-# TODO (8): return jsonify {'success': True}
 
 @app.route('/messages', methods=['POST'])
 @get_connection_and_handle_error
