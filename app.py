@@ -56,18 +56,3 @@ def add_message(*args, **kwargs):
 # TODO (5): Use request.json[key] to extract the 'ID' key.
 # TODO (6): Execute delete from messages where ID=%s;
 # TODO (7): return jsonify {'success': True}
-
-@app.route('/messages', methods=['DELETE'])
-@get_connection_and_handle_error
-def delete_message(*args, **kwargs):
-    """DELETE /messages - Deletes a message from the database."""
-
-    conn = kwargs['conn']
-
-    ID = request.json['ID']
-
-    conn.execute('delete from messages where ID=%s;', (ID,))
-
-    return jsonify({
-        'success': True
-    })

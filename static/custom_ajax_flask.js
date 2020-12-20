@@ -55,10 +55,7 @@ async function sendPostMessage(message, sender) {
 async function sendDeleteMessage(ID) {
     // TODO (8): Send an ajax request to DELETE /messages with body as {'ID', ID}
     // TODO (9): Return response returned by ajax request.
-    response = await sendAjaxRequest('/messages', 'DELETE', {
-        'ID': ID
-    });
-    return response;
+    return null;
 }
 
 /**
