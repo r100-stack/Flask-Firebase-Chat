@@ -66,8 +66,6 @@ async function sendDeleteMessage(ID) {
  * @returns {object} JSON object with a success param
  */
 async function sendPatchMessage(ID, message) {
-    // TODO (8): Send an ajax request to EDIT /messages with body as {'ID', ID, 'message': message}
-    // TODO (9): Return response returned by ajax request.
     response = await sendAjaxRequest('/messages', 'PATCH', {
         'ID': ID,
         'message': message
