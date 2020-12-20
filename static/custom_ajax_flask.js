@@ -42,11 +42,7 @@ async function sendGetMessages() {
 async function sendPostMessage(message, sender) {
     // TODO (9): Send an ajax request to POST /messages with the body as {'message': message, 'sender': sender}
     // TODO (10): Return the response of the ajax request
-    response = await sendAjaxRequest('/messages', 'POST', {
-        'message': message,
-        'sender': sender
-    });
-    return response;
+    return null;
 }
 
 /**

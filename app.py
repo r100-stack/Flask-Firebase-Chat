@@ -1,5 +1,5 @@
 # TODO (1): from flask, also import request
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template
 from init_flask import app
 from error_handling import get_connection_and_handle_error
 
@@ -40,20 +40,3 @@ def get_messages(*args, **kwargs):
 # TODO (6): Use request.json[key] to extract the 'message' and 'sender' keys.
 # TODO (7): Execute insert into messages (message, sender) values (%s, %s); Here the values are the extracted keys from the request.
 # TODO (8): return jsonify {'success': True}
-
-@app.route('/messages', methods=['POST'])
-@get_connection_and_handle_error
-def add_message(*args, **kwargs):
-    """POST /messages - Adds a message to the database."""
-
-    conn = kwargs['conn']
-
-    message = request.json['message']
-    sender = request.json['sender']
-
-    conn.execute(
-        'insert into messages (message, sender) values (%s, %s);', (message, sender,))
-
-    return jsonify({
-        'success': True
-    })
