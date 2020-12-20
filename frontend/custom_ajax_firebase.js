@@ -55,15 +55,6 @@ async function sendDeleteMessage(ID) {
         // TODO (3): Within the function, resolve({ 'success': true });
         // TODO (4): .delete().then(function () {}) .catch(function () {})
         // TODO (5): Within the function, resolve({ 'success': false });
-        await db.collection("messages").doc(ID).delete()
-            .then(function () {
-                console.log('delete successful');
-                resolve({ 'success': true });
-            })
-            .catch(function (error) {
-                console.log(error);
-                resolve({ 'success': false });
-            });
     });
 }
 
