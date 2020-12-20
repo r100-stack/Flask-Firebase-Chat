@@ -15,14 +15,6 @@ function sendAjaxRequest(url, type, body) {
                 // TODO (14): data: JSON.stringify(body)
                 // TODO (15): complete = function(response) {}
                 // TODO (16): Within the function, resolve(response.responseJSON);
-                url: url,
-                type: type,
-                headers: { 'Content-Type': 'application/json' },
-                data: JSON.stringify(body),
-                complete: function (response) {
-                    console.log(response.responseJSON);
-                    resolve(response.responseJSON);
-                }
             });
         } catch (error) {
             console.log(error);
@@ -37,8 +29,7 @@ function sendAjaxRequest(url, type, body) {
 async function sendGetMessages() {
     // TODO (17): Send an ajax request to GET /messages and body = null
     // TODO (18): return the response received by the ajax request.
-    response = await sendAjaxRequest('/messages', 'GET', null);
-    return response;
+    return null;
 }
 
 /**
