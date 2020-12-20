@@ -8,7 +8,22 @@
 function sendAjaxRequest(url, type, body) {
     return new Promise(resolve => {
         try {
-            resolve(null);
+            $.ajax({
+                // TODO (11): url: url
+                // TODO (12): type: type
+                // TODO (13): headers: { 'Content-Type': 'application/json' }
+                // TODO (14): data: JSON.stringify(body)
+                // TODO (15): complete = function(response) {}
+                // TODO (16): Within the function, resolve(response.responseJSON);
+                url: url,
+                type: type,
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify(body),
+                complete: function (response) {
+                    console.log(response.responseJSON);
+                    resolve(response.responseJSON);
+                }
+            });
         } catch (error) {
             console.log(error);
         }
@@ -20,7 +35,10 @@ function sendAjaxRequest(url, type, body) {
  * @returns {object} messages as a JSON array of JSON objects (messages)
  */
 async function sendGetMessages() {
-    return null;
+    // TODO (17): Send an ajax request to GET /messages and body = null
+    // TODO (18): return the response received by the ajax request.
+    response = await sendAjaxRequest('/messages', 'GET', null);
+    return response;
 }
 
 /**
