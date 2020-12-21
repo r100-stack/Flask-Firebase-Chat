@@ -45,8 +45,10 @@
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 
+<!-- Dependency to track visitors to your site -->
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+
+<!-- Dependency to use Firestore in your project -->
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
 
 <script>
@@ -64,6 +66,7 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
 
     var db = firebase.firestore();
 </script>
