@@ -10,6 +10,7 @@
     + [Option 1 (**Recommended**)](#option-1-(**recommended**))
     + [Option 2 (Manual setup)](#option-2-(manual-setup))
   * [Setting up Python dependencies](#setting-up-python-dependencies)
+  * [Cloning repo](#cloning-repo)
 - [1. Flask version](#1-flask-version)
   * [Step 1: Setting up and starting the Flask server](#step-1-setting-up-and-starting-the-flask-server)
   * [Step 2: Creating a connection to the MySQL db](#step-2-creating-a-connection-to-the-mysql-db)
@@ -178,6 +179,16 @@ All dependencies we need for this project are in ``requirements.txt``. To instal
 ```bash
 pip install -r requirements.txt
 ```
+
+## Cloning repo
+
+1. Go to the Documents folder (/home/kali/Documents).
+2. Next to clone the repo, execute the following command.
+
+```bash
+git clone https://github.com/rohan-kadkol/Flask-Firebase-Chat.git
+```
+
 
 # 1. Flask version
 
