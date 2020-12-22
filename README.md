@@ -1119,7 +1119,7 @@ Let us host our Firebase version of our app with Firebase Hosting.
 2. Install the Firebase command line tools (skip if using pre-setup VM or if already installed).
 
 ```bash
-npm install -g firebase-tools
+sudo npm install -g firebase-tools
 ```
 
 3. Login to Firebase
