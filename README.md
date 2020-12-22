@@ -317,6 +317,11 @@ return response
 
 This step was just a layer of abstraction. Hence, there won't be any visible change in website.
 
+```bash
+# To start the Flask server
+flask run
+```
+
 <img src="assets/step2_sol.png">
 
 ## Step 3: GET /messages
@@ -430,6 +435,11 @@ Sometimes a regular refresh using ``F5`` may not display any changes. Hence, do 
 
 You should now see some samples messages or no messages if no sample messages exist in the db. Regardless, you shouldn't see the error that we were seeing in steps 1 and 2.
 
+```bash
+# To start the Flask server
+flask run
+```
+
 <img src="assets/step3_sol.gif">
 
 ## Step 4: POST /messages
@@ -506,6 +516,11 @@ return response;
 
 After doing a hard reload (``Ctrl+F5``), you can test adding a message. After clicking the ``Send`` button, you should see the message appear in the messages list.
 
+```bash
+# To start the Flask server
+flask run
+```
+
 <img src="assets/step4_sol.gif">
 
 ## Step 5: DELETE /messages
@@ -579,6 +594,11 @@ return response;
 
 Now clicking the trash button on each message will delete the message.
 
+```bash
+# To start the Flask server
+flask run
+```
+
 <img src="assets/step5_sol.gif">
 
 ## Step 6: PATCH /messages
@@ -648,6 +668,13 @@ response = await sendAjaxRequest('/messages', 'PATCH', {
     'message': message
 });
 return response;
+```
+
+You should now be able to edit messages.
+
+```bash
+# To start the Flask server
+flask run
 ```
 
 <img src="assets/step6_sol.gif">
