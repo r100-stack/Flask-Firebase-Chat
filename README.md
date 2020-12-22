@@ -154,6 +154,21 @@ pip install -r requirements.txt
 
 ## Step 1: Setting up and starting the Flask server
 
+To begin working on this step, switch to the ``Step1-StarterCode`` branch.
+
+```bash
+git checkout Step1-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+___
+
 Flask makes server setup very easy. With just a few lines of code, we can get a basic server up and running.
 
 Let's start by doing some imports.
