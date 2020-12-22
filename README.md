@@ -142,6 +142,8 @@ deactivate
 
 If you see an (env) in the beginning of each command, you have successfully created and entered the Python virtual environment.
 
+<img src="assets/python_venv_setup_editted.png">
+
 All dependencies we need for this project are in ``requirements.txt``. To install it, run the following in the terminal **while entered in the Python virtual environment**.
 
 ```bash
