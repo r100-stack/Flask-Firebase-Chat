@@ -1153,4 +1153,8 @@ That's all we have in our exercise. Congratulations on making it till the end! B
 
 I hope you enjoyed this exercise and benefitted from it.
 
+If you enjoyed this exercise repo, be sure to star it and [follow me](http://www.rohankadkol.com).
+
+Thanks!
+
 Geaux Tigers! 🐯
