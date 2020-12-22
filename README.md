@@ -85,6 +85,22 @@ Follow the below instructions on either your local or virtual machine. Choose th
 
 ___
 
+To test if your MySQL server is working, type ``mysql`` in the command line. You might get an error similar to the one below
+
+```
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+```
+
+If you do get this error, you can start the server with this command
+
+```bash
+/etc/init.d/mysql start
+```
+
+If it asks for a password, enter the system password (``kali`` if you're using the [pre-setup VM](###option-1-(**recommended**)))
+
+___
+
 Once you have a **running** MySQL server along with **valid credentials**, we can setup our messages table in the database.
 
 Run the below commands to setup the table.
