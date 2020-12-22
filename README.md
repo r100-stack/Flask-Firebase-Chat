@@ -167,7 +167,13 @@ git add .
 git commit -m "xyz"
 # Here xyz is any message describing the work you've done in the commit
 ```
+
+Before continuing, confirm you are in the ``Step1-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_1.png">
+
 ___
+
 
 Flask makes server setup very easy. With just a few lines of code, we can get a basic server up and running.
 
@@ -255,6 +261,27 @@ To test the server, open a browser and go to [localhost:5000](localhost:5000). Y
 
 ## Step 2: Creating a connection to the MySQL db
 
+To begin working on this step, switch to the ``Step2-StarterCode`` branch.
+
+```bash
+git checkout Step2-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step2-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_2.png">
+
+___
+
+
 Programming is not only about getting the right output. It is also about robustness, efficiency, code structure and more. A common programming pattern to avoid bugs and improve readability is to create layers of abstractions. We're going to do the same.
 
 Let us create a layer of abstraction that creates a database connection. This connection can then be used by any endpoint we implement in the future steps.
@@ -295,6 +322,27 @@ This step was just a layer of abstraction. Hence, there won't be any visible cha
 <img src="assets/step2_sol.png">
 
 ## Step 3: GET /messages
+
+To begin working on this step, switch to the ``Step3-StarterCode`` branch.
+
+```bash
+git checkout Step3-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step3-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_3.png">
+
+___
+
 
 Time to create our second endpoint! We will now create a ``GET /messages`` endpoint to return all the messages in our db.
 
@@ -392,6 +440,27 @@ You should now see some samples messages or no messages if no sample messages ex
 
 ## Step 4: POST /messages
 
+To begin working on this step, switch to the ``Step4-StarterCode`` branch.
+
+```bash
+git checkout Step4-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step4-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_4.png">
+
+___
+
+
 There's no fun in just seeing sample messages. Let us work on adding our own messages to the database.
 
 Let us create a ``POST /messages`` endpoint (Similar to step 3), and use the ``@get_connection_and_handle_error`` to get a db connection.
@@ -447,6 +516,27 @@ After doing a hard reload (``Ctrl+F5``), you can test adding a message. After cl
 
 ## Step 5: DELETE /messages
 
+To begin working on this step, switch to the ``Step5-StarterCode`` branch.
+
+```bash
+git checkout Step5-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step5-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_5.png">
+
+___
+
+
 "Oops, I sent a message by accident. I want to delete it."
 
 Let's now work on deleting a message.
@@ -498,6 +588,27 @@ Now clicking the trash button on each message will delete the message.
 <img src="assets/step5_sol.gif">
 
 ## Step 6: PATCH /messages
+
+To begin working on this step, switch to the ``Step6-StarterCode`` branch.
+
+```bash
+git checkout Step6-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step6-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_6.png">
+
+___
+
 
 Made an embarassing typo? Let's implement the edit functionality so we correct that embarassing typo.
 
@@ -621,6 +732,27 @@ Your ``var firebaseConfig`` should look similar to the ``var firebaseConfig`` ab
 <!-- TODO***: Include Firebase setup screenshots -->
 <!-- TODO***: Include Firebase setup instructions -->
 
+To begin working on this step, switch to the ``Step7-StarterCode`` branch.
+
+```bash
+git checkout Step7-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step7-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_7.png">
+
+___
+
+
 Now that we have ``var firebaseConfig`` pointing to either the pre-setup Firebase project or your own Firebase project, we can paste it in our project.
 
 Below is the configuration code for that project. It contains:
@@ -735,6 +867,27 @@ Hence, type the path to the file in the browser. It should look something simila
 
 ## Step 8: Sending a message
 
+To begin working on this step, switch to the ``Step8-StarterCode`` branch.
+
+```bash
+git checkout Step8-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step8-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_8.png">
+
+___
+
+
 Adding a document to the Firestore db is as easy as doing a ``.add()`` call to the ``db.collection()`` and passing the JSON object to add as a parameter to ``.add()``.
 
 We can use ``.then(function() {})`` and ``.catch(function(error) {})`` to execute code on success and on failure respectively.
@@ -767,6 +920,27 @@ async function sendPostMessage(message, sender) {
 
 ## Step 9: Deleting a message
 
+To begin working on this step, switch to the ``Step9-StarterCode`` branch.
+
+```bash
+git checkout Step9-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step9-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_9.png">
+
+___
+
+
 To delete a document, we first need a reference to it. Each document is given a unique ID by Firebase. Hence, to get a reference to a document, we can do ``db.collection('messages').doc(ID)``, where ID is the id of the document.
 
 Once we have a reference to the document, we can call a ``.delete()`` on it.
@@ -794,6 +968,27 @@ async function sendDeleteMessage(ID) {
 <img src="assets/step9_sol.gif">
 
 ## Step 10: Editing a message
+
+To begin working on this step, switch to the ``Step10-StarterCode`` branch.
+
+```bash
+git checkout Step10-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step10-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_10.png">
+
+___
+
 
 To edit a message, we can call ``onUpdate()`` on the reference to the document to edit. We can then pass the parameters to update in a JSON object passed to ``onUpdate()``. In our case, message is the only parameter of a document that we want to edit.
 
@@ -824,6 +1019,27 @@ async function sendPatchMessage(ID, message) {
 # 4. Firebase Hosting
 
 ## Step 11: Hosting the Firebase version of the website with Firebase Hosting
+
+To begin working on this step, switch to the ``Step11-StarterCode`` branch.
+
+```bash
+git checkout Step11-StarterCode
+```
+
+If you get an error, you might have to save the changes before running the above checkout command. Hence, save your changes using the below command.
+
+```bash
+git add .
+git commit -m "xyz"
+# Here xyz is any message describing the work you've done in the commit
+```
+
+Before continuing, confirm you are in the ``Step11-StarterCode`` branch by looking at the bottom left of VS Code.
+
+<img src="assets/vscode_git_branch_11.png">
+
+___
+
 
 In order to host the Flask version of our website, we would need to host it on a VM or something similar. Hence, we would need to manage scalability, maintainance, and more.
 
