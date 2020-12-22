@@ -7,26 +7,26 @@
   * [How to follow this repo](#how-to-follow-this-repo)
   * [How to use git in this repo](#how-to-use-git-in-this-repo)
   * [Setup to follow this repo](#setup-to-follow-this-repo)
-    + [Option 1 (**Recommended**)](#option-1----recommended---)
-    + [Option 2 (Manual setup)](#option-2--manual-setup-)
+    + [Option 1 (**Recommended**)](#option-1-(**recommended**))
+    + [Option 2 (Manual setup)](#option-2-(manual-setup))
   * [Setting up Python dependencies](#setting-up-python-dependencies)
 - [1. Flask version](#1-flask-version)
-  * [Step 1: Setting up and starting the Flask server](#step-1--setting-up-and-starting-the-flask-server)
-  * [Step 2: Creating a connection to the MySQL db](#step-2--creating-a-connection-to-the-mysql-db)
-  * [Step 3: GET /messages](#step-3--get--messages)
-  * [Step 4: POST /messages](#step-4--post--messages)
-  * [Step 5: DELETE /messages](#step-5--delete--messages)
-  * [Step 6: PATCH /messages](#step-6--patch--messages)
+  * [Step 1: Setting up and starting the Flask server](#step-1-setting-up-and-starting-the-flask-server)
+  * [Step 2: Creating a connection to the MySQL db](#step-2-creating-a-connection-to-the-mysql-db)
+  * [Step 3: GET /messages](#step-3-get-messages)
+  * [Step 4: POST /messages](#step-4-post-messages)
+  * [Step 5: DELETE /messages](#step-5-delete-messages)
+  * [Step 6: PATCH /messages](#step-6-patch-messages)
 - [3. Firebase Version](#3-firebase-version)
   * [Firebase setup](#firebase-setup)
-    + [Option 1: Use pre-setup Firebase config](#option-1--use-pre-setup-firebase-config)
-    + [Option 2: Setup a new Firebase project](#option-2--setup-a-new-firebase-project)
-  * [Step 7: Firebase setup and GET messages](#step-7--firebase-setup-and-get-messages)
-  * [Step 8: Sending a message](#step-8--sending-a-message)
-  * [Step 9: Deleting a message](#step-9--deleting-a-message)
-  * [Step 10: Editing a message](#step-10--editing-a-message)
+    + [Option 1: Use pre-setup Firebase config (quicker)](#option-1-use-pre-setup-firebase-config-quicker-)
+    + [Option 2: Setup a new Firebase project (required for step 11: Firebase Hosting)](#option-2-setup-a-new-firebase-project-required-for-step-11-firebase-hosting-)
+  * [Step 7: Firebase setup and GET messages](#step-7-firebase-setup-and-get-messages)
+  * [Step 8: Sending a message](#step-8-sending-a-message)
+  * [Step 9: Deleting a message](#step-9-deleting-a-message)
+  * [Step 10: Editing a message](#step-10-editing-a-message)
 - [4. Firebase Hosting](#4-firebase-hosting)
-  * [Step 11: Hosting the Firebase version of the website with Firebase Hosting](#step-11--hosting-the-firebase-version-of-the-website-with-firebase-hosting)
+  * [Step 11: Hosting the Firebase version of the website with Firebase Hosting](#step-11-hosting-the-firebase-version-of-the-website-with-firebase-hosting)
 - [Conclusion](#conclusion)
 
 Today, almost all websites/apps provide dynamic content. This dynamic content could be inventory of products on sale, list of customers, orders, and more.
@@ -733,7 +733,7 @@ Looking at the benefits Firestore has to offer, we will now implement our gettin
 
 ## Firebase setup
 
-### Option 1: Use pre-setup Firebase config
+### Option 1: Use pre-setup Firebase config (quicker)
 
 **If you want to use Firebase hosting, you'll need your own Firebase project. Hence, follow option 2 below**
 
@@ -754,7 +754,7 @@ var firebaseConfig = {
 };
 ```
 
-### Option 2: Setup a new Firebase project
+### Option 2: Setup a new Firebase project (required for step 11: Firebase Hosting)
 
 Instead of using the pre-setup Firebase project in option 1, you can setup your own Firebase project.
 
