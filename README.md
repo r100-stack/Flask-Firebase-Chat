@@ -870,10 +870,14 @@ function sendGetMessages(onChange) {
 
 To test the website, you will have to open the ``index.html`` file and not ``localhost:5000``. This is because in our new version, the javascript in the HTML page directly sends requests to the Firestore backend db. There is no intermidiate server as in the case of the Flask implementation.
 
-Hence, type the path to the file in the browser. It should look something similar to,
+Hence, type the path to the file in the browser. It should look something similar to the one below.
+
 ```
-/home/rohan/Documents/Flask-Firebase-Chat/frontend/index.html
+Go to /home/kali/Documents/Flask-Firebase-Chat/frontend/index.html
+Use Ctrl+F5 for hard reload if changes not appearing
 ```
+
+You should now be able to get messages.
 
 <img src="assets/step7_sol.gif">
 
@@ -928,6 +932,13 @@ async function sendPostMessage(message, sender) {
 }
 ```
 
+```
+Go to /home/kali/Documents/Flask-Firebase-Chat/frontend/index.html
+Use Ctrl+F5 for hard reload if changes not appearing
+```
+
+You should now be able to get and add messages.
+
 <img src="assets/step8_sol.gif">
 
 ## Step 9: Deleting a message
@@ -977,6 +988,13 @@ async function sendDeleteMessage(ID) {
 }
 ```
 
+```
+Go to /home/kali/Documents/Flask-Firebase-Chat/frontend/index.html
+Use Ctrl+F5 for hard reload if changes not appearing
+```
+
+You should now be able to get, add, and delete messages.
+
 <img src="assets/step9_sol.gif">
 
 ## Step 10: Editing a message
@@ -1025,6 +1043,13 @@ async function sendPatchMessage(ID, message) {
     });
 }
 ```
+
+```
+Go to /home/kali/Documents/Flask-Firebase-Chat/frontend/index.html
+Use Ctrl+F5 for hard reload if changes not appearing
+```
+
+You should now be able to get, add, delete, and edit messages.
 
 <img src="assets/step10_sol.gif">
 
@@ -1112,6 +1137,8 @@ Your public URL will be something similar to:
 ```
 flaskchat-6684a.web.app
 ```
+
+You should now be able to access the Firebase version of the website on a public domain.
 
 <img src="assets/step11_sol.gif">
 
