@@ -257,8 +257,6 @@ To test the server, open a browser and go to [localhost:5000](localhost:5000). Y
 
 <img src="assets/step1_sol.png">
 
-<!-- TODO***: Add a screenshot at the end of each step. -->
-
 ## Step 2: Creating a connection to the MySQL db
 
 To begin working on this step, switch to the ``Step2-StarterCode`` branch.
@@ -433,10 +431,6 @@ Sometimes a regular refresh using ``F5`` may not display any changes. Hence, do 
 You should now see some samples messages or no messages if no sample messages exist in the db. Regardless, you shouldn't see the error that we were seeing in steps 1 and 2.
 
 <img src="assets/step3_sol.gif">
-
-<!-- TODO***: Add sample messages to the MySQL db in the Kali VM -->
-
-<!-- TODO***: Do we need a ___ after every step/section? -->
 
 ## Step 4: POST /messages
 
@@ -729,9 +723,6 @@ Your ``var firebaseConfig`` should look similar to the ``var firebaseConfig`` ab
 
 ## Step 7: Firebase setup and GET messages
 
-<!-- TODO***: Include Firebase setup screenshots -->
-<!-- TODO***: Include Firebase setup instructions -->
-
 To begin working on this step, switch to the ``Step7-StarterCode`` branch.
 
 ```bash
@@ -815,14 +806,10 @@ Now, to get the messages, all we have to do is subscribe as a listener. We would
 
 On Firebase, data is stored in ``collections``. Each collection has ``documents``. Each document is a set of ``key-value pairs``. Apart from documents, collections can also hold more collections called ``sub-collections``. This enables Firestore to store data in a hierarchical fashion.
 
-Here's an example of how data is stored
-<!-- TODO***: Complete the above description of the below example -->
-<!-- TODO***: Add screenshot of example -->
+We are going to have a collection called `messages`. In this ``messages`` collection, each document will be a message. Each document (message) will have three fields: ``message``, ``sender``, and ``timestamp``.
+
+Here's an example of how our data will be stored:
 <img src="assets/firestore_structure_example.png">
-
-We are going to have a collection called `messages`. In this ``messages`` collection, each document will be a message. Each document (message) will have three fields: message, sender, and timestamp.
-
-<!-- TODO***: Insert example of our Firestore db structure -->
 
 Now that we have planned the structure of our Firestore db, let us work on getting the messages. 
 
@@ -833,8 +820,6 @@ Finally to subscribe as a listener and add a callback, add a ``.onSnapshot((quer
 Within the curly braces of the callback function, create a list of messages by iterating through the ``querySnapshot``.
 
 Then call ``onChange(messages)`` and pass the list of messages as a parameter. Here, ``onChange(messages)`` is a frontend method that displays the passed list of messages to the UI.
-
-<!-- TODO***: Make sure everything that requires ```` is within it. -->
 
 ``custom_ajax_firebase.js``
 ```javascript
