@@ -417,6 +417,8 @@ Finally, return an HTTP 200 response with ``success=True`` and the list of messa
 ``app.py``
 ```python
 # TODO 6-10
+@app.route('/messages', methods=['GET'])
+@get_connection_and_handle_error
 def get_messages(*args, **kwargs):
     """GET /messages - Returns a JSON response with the messages in the database."""
 
