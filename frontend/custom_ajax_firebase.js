@@ -70,12 +70,6 @@ async function sendDeleteMessage(ID) {
  */
 async function sendPatchMessage(ID, message) {
     return new Promise(async resolve => {
-        // TODO (1): db.collection('messages').doc(ID).update()
-        // TODO (2): Pass the following as a parameter to update: {message: message}
-        // TODO (3): .update({}).then(function () {})
-        // TODO (4): Within the function, resolve({ 'success': true });
-        // TODO (5): .update({}).then(function () {}) .catch(function () {})
-        // TODO (6): Within the function, resolve({ 'success': false });
         await db.collection("messages").doc(ID).update({
             message: message
         })
